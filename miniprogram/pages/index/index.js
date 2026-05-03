@@ -52,21 +52,34 @@ Page({
     return Promise.all([this.loadHotGroupBuys(), this.loadNearbyGroupBuys()]);
   },
 
-  createBaseQuery() {
-    return db.collection('group_buy').where({
-      status: 'active',
-      deadline: db.command.gt(new Date())
-    });
+  fetchActiveGroupBuys(limit = 20) {
+    console.log('index fetchActiveGroupBuys start');
+    return db.collection('group_buy')
+      .where({
+        status: 'active'
+      })
+      .limit(limit)
+      .get()
+      .then(res => {
+        const now = Date.now();
+        const list = (res.data || []).filter(item => {
+          return item.deadline && new Date(item.deadline).getTime() > now;
+        });
+        console.log('index fetchActiveGroupBuys success:', list.length);
+        return list;
+      })
+      .catch(err => {
+        console.error('index fetchActiveGroupBuys error:', err);
+        throw err;
+      });
   },
 
   loadHotGroupBuys() {
-    return this.createBaseQuery()
-      .orderBy('currentCount', 'desc')
-      .limit(4)
-      .get()
-      .then(res => {
+    return this.fetchActiveGroupBuys(30)
+      .then(list => {
+        const sortedList = list.sort((a, b) => (b.currentCount || 0) - (a.currentCount || 0)).slice(0, 4);
         this.setData({
-          hotGroupBuys: enrichGroupBuyList(res.data)
+          hotGroupBuys: enrichGroupBuyList(sortedList)
         });
       })
       .catch(err => {
@@ -82,15 +95,14 @@ Page({
     this.setData({ loading: true });
     const nextPage = isLoadMore ? this.data.page + 1 : 1;
 
-    return this.createBaseQuery()
-      .orderBy('deadline', 'asc')
-      .skip((nextPage - 1) * this.data.pageSize)
-      .limit(this.data.pageSize)
-      .get()
-      .then(res => {
-        const list = enrichGroupBuyList(res.data);
+    return this.fetchActiveGroupBuys(40)
+      .then(allList => {
+        const sortedList = allList.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
+        const start = (nextPage - 1) * this.data.pageSize;
+        const end = start + this.data.pageSize;
+        const list = enrichGroupBuyList(sortedList.slice(start, end));
         const nearbyGroupBuys = isLoadMore ? this.data.nearbyGroupBuys.concat(list) : list;
-        const hasMore = list.length >= this.data.pageSize;
+        const hasMore = end < sortedList.length;
 
         this.setData({
           nearbyGroupBuys,

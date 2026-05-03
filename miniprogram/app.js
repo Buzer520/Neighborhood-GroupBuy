@@ -16,11 +16,12 @@ App({
     }
     
     try {
+      const cloudEnv = wx.cloud.DYNAMIC_CURRENT_ENV || 'groupbuy-prod-d1g2aeyhy9dd21ed2';
       wx.cloud.init({
-        env: 'groupbuy-prod-d1g2aeyhy9dd21ed2',
+        env: cloudEnv,
         traceUser: true,
       });
-      console.log('云开发初始化成功');
+      console.log('云开发初始化成功，env:', cloudEnv);
     } catch (e) {
       console.error('云开发初始化失败:', e);
     }
@@ -56,7 +57,10 @@ App({
       },
       fail: err => {
         console.error('login 云函数调用失败:', err);
-        callback && callback({ success: false, message: err.message });
+        const message = err && err.errMsg && err.errMsg.includes('timeout')
+          ? '云函数调用超时，请确认已选择正确云环境并部署 login 云函数'
+          : err.message;
+        callback && callback({ success: false, message: message || '登录失败' });
       },
       complete: () => {
         console.log('login 云函数调用完成');
