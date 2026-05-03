@@ -1,176 +1,210 @@
-.search-bar {
-  display: flex;
-  align-items: center;
-  padding: 20rpx 30rpx;
-  background-color: #ffffff;
+.discover-page {
+  padding: 24rpx;
+}
+
+.discover-top {
+  padding: 22rpx;
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 10;
+}
+
+.search-wrap {
+  display: flex;
+  align-items: center;
+  padding-left: 24rpx;
+  height: 84rpx;
+  border-radius: 999rpx;
+  background: #f4f6fb;
+  overflow: hidden;
 }
 
 .search-input {
   flex: 1;
-  height: 72rpx;
-  padding: 0 30rpx;
-  background-color: #f5f5f5;
-  border-radius: 36rpx;
+  height: 84rpx;
   font-size: 28rpx;
+  color: #25324a;
 }
 
-.sort-btn {
+.search-submit {
+  width: 120rpx;
+  height: 84rpx;
   display: flex;
   align-items: center;
-  padding: 0 20rpx;
+  justify-content: center;
+  color: #ff6b6b;
   font-size: 26rpx;
-  color: #666666;
+  font-weight: 700;
 }
 
-.sort-arrow {
-  font-size: 20rpx;
-  margin-left: 8rpx;
+.filter-row {
+  margin-top: 20rpx;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12rpx;
 }
 
-.category-bar {
-  background-color: #ffffff;
-  padding: 0 0 20rpx 0;
-  border-bottom: 1rpx solid #eeeeee;
+.filter-chip {
+  padding: 10rpx 18rpx;
+  border-radius: 999rpx;
+  background: #f4f6fb;
+  color: #6b7280;
+  font-size: 22rpx;
+}
+
+.filter-chip.strong {
+  background: rgba(255, 107, 107, 0.12);
+  color: #ff6b6b;
+}
+
+.filter-clear {
+  margin-left: auto;
+  font-size: 22rpx;
+  color: #ff6b6b;
 }
 
 .category-scroll {
+  margin-top: 20rpx;
   white-space: nowrap;
-  padding: 0 20rpx;
 }
 
-.category-item {
-  display: inline-block;
-  padding: 12rpx 30rpx;
-  margin: 0 10rpx;
-  font-size: 26rpx;
-  color: #666666;
-  background-color: #f5f5f5;
-  border-radius: 30rpx;
+.category-list {
+  display: inline-flex;
+  gap: 14rpx;
 }
 
-.category-item.active {
-  background-color: rgba(255, 107, 107, 0.15);
-  color: #FF6B6B;
-  font-weight: bold;
-}
-
-.result-tip {
-  display: flex;
+.category-pill {
+  display: inline-flex;
   align-items: center;
-  gap: 20rpx;
-  padding: 20rpx 30rpx;
+  gap: 10rpx;
+  padding: 14rpx 22rpx;
+  border-radius: 999rpx;
+  background: #ffffff;
+  color: #6b7280;
   font-size: 24rpx;
-  color: #999999;
+  box-shadow: 0 10rpx 24rpx rgba(31, 41, 55, 0.05);
 }
 
-.result-tip text {
-  padding: 4rpx 12rpx;
-  background-color: #f5f5f5;
-  border-radius: 8rpx;
+.category-pill.active {
+  background: linear-gradient(135deg, #ff6b6b, #ff927a);
+  color: #ffffff;
 }
 
-.content {
-  height: calc(100vh - 200rpx);
-  padding: 20rpx;
-}
-
-.waterfall {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20rpx;
-}
-
-.waterfall-item {
-  width: calc(50% - 10rpx);
-  background-color: #ffffff;
-  border-radius: 16rpx;
-  overflow: hidden;
-  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.06);
-  margin-bottom: 20rpx;
-}
-
-.item-image {
-  width: 100%;
-  height: 320rpx;
-}
-
-.item-info {
-  padding: 16rpx;
-}
-
-.item-name {
-  font-size: 28rpx;
-  color: #333333;
-  line-height: 1.4;
-  margin-bottom: 12rpx;
-  display: block;
-}
-
-.item-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12rpx;
-}
-
-.item-community {
-  font-size: 20rpx;
-  max-width: 140rpx;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.item-price {
-  font-size: 32rpx;
-  font-weight: bold;
-}
-
-.item-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.item-progress {
-  display: flex;
-  align-items: center;
-}
-
-.progress-bar-small {
-  width: 100rpx;
-  height: 6rpx;
-  background-color: #eeeeee;
-  border-radius: 3rpx;
-  overflow: hidden;
-}
-
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #FF6B6B, #FF8E8E);
-  border-radius: 3rpx;
-  transition: width 0.3s ease;
-}
-
-.progress-text-small {
-  font-size: 20rpx;
-  color: #999999;
-  margin-left: 8rpx;
-}
-
-.item-countdown {
-  font-size: 22rpx;
-  color: #FF6B6B;
-}
-
-.loading-tip,
-.no-more,
-.empty-tip {
-  text-align: center;
-  padding: 30rpx;
-  color: #999999;
+.category-pill-icon {
   font-size: 26rpx;
+}
+
+.result-bar {
+  margin-top: 28rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.result-count {
+  font-size: 24rpx;
+  color: #98a2b3;
+}
+
+.discover-list {
+  margin-top: 20rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 18rpx;
+}
+
+.discover-card {
+  display: flex;
+  padding: 18rpx;
+}
+
+.discover-cover {
+  width: 196rpx;
+  height: 196rpx;
+  border-radius: 22rpx;
+  flex-shrink: 0;
+}
+
+.discover-main {
+  flex: 1;
+  min-width: 0;
+  margin-left: 20rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.discover-meta,
+.discover-price-row,
+.discover-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.discover-time,
+.discover-sub,
+.discover-remain,
+.discover-count {
+  font-size: 22rpx;
+  color: #6b7280;
+}
+
+.discover-title {
+  display: block;
+  margin-top: 14rpx;
+  font-size: 30rpx;
+  line-height: 1.45;
+  color: #25324a;
+}
+
+.discover-sub {
+  display: block;
+  margin-top: 10rpx;
+}
+
+.discover-price-row {
+  margin-top: 18rpx;
+}
+
+.discover-price {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #ff6b6b;
+}
+
+.discover-bottom {
+  margin-top: 14rpx;
+}
+
+.discover-link {
+  font-size: 24rpx;
+  color: #ff6b6b;
+  font-weight: 600;
+}
+
+.status-tip {
+  text-align: center;
+  font-size: 24rpx;
+  color: #98a2b3;
+  padding: 24rpx 0;
+}
+
+.empty-card {
+  padding: 40rpx 30rpx;
+  text-align: center;
+}
+
+.empty-title {
+  display: block;
+  font-size: 30rpx;
+  color: #25324a;
+  font-weight: 700;
+}
+
+.empty-desc {
+  display: block;
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  color: #6b7280;
 }

@@ -70,7 +70,7 @@ Page({
   },
 
   loadMessages: function(isLoadMore = false) {
-    if (this.loading) return Promise.resolve();
+    if (this.data.loading) return Promise.resolve();
 
     this.setData({ loading: true });
 
@@ -102,15 +102,15 @@ Page({
 
         const key = currentTab === 'system' ? 'systemMessages' : 'interactionMessages';
         const newList = isLoadMore ? [...this.data[key], ...list] : list;
+        const hasMore = list.length >= this.data.pageSize;
         const hasUnreadSystem = currentTab === 'system' 
           ? newList.some(function(m) { return !m.read; })
           : this.data.hasUnreadSystem;
         const hasUnreadInteraction = currentTab === 'interaction' 
           ? newList.some(function(m) { return !m.read; })
           : this.data.hasUnreadInteraction;
-
         const showNoMore = !hasMore && newList.length > 0;
-        const showEmpty = newList.length === 0 && !loading;
+        const showEmpty = newList.length === 0;
 
         this.setData({
           [key]: newList,
@@ -130,7 +130,7 @@ Page({
   },
 
   onTabChange: function(e) {
-    const { value } = e.detail;
+    const { value } = e.currentTarget.dataset;
     if (value === this.data.currentTab) return;
 
     this.setData({

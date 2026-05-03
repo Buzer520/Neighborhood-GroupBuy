@@ -208,7 +208,7 @@ Page({
   },
 
   onOrderTabChange: function(e) {
-    const { value } = e.detail;
+    const { value } = e.currentTarget.dataset;
     this.setData({ currentOrderTab: value });
   },
 

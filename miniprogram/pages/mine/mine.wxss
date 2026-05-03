@@ -1,41 +1,64 @@
-.user-section {
-  background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%);
-  padding: 60rpx 30rpx 80rpx;
+.mine-page {
+  padding: 24rpx 24rpx 40rpx;
+}
+
+.profile-card,
+.order-section,
+.menu-section {
+  margin-top: 22rpx;
+}
+
+.profile-card {
+  margin-top: 0;
+  padding: 28rpx;
+  background: linear-gradient(160deg, #ff786f 0%, #ffa47f 100%);
+  box-shadow: 0 24rpx 50rpx rgba(255, 107, 107, 0.24);
 }
 
 .user-info {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+}
+
+.user-meta,
+.guest-meta {
+  flex: 1;
 }
 
 .user-avatar {
-  width: 120rpx;
-  height: 120rpx;
+  width: 112rpx;
+  height: 112rpx;
   border-radius: 50%;
-  border: 4rpx solid #ffffff;
-  margin-bottom: 20rpx;
+  border: 4rpx solid rgba(255, 255, 255, 0.86);
+  margin-right: 22rpx;
 }
 
 .user-nickname {
-  font-size: 32rpx;
+  display: block;
+  font-size: 34rpx;
   color: #ffffff;
-  font-weight: 500;
+  font-weight: 700;
+}
+
+.user-tip {
+  display: block;
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.86);
 }
 
 .login-btn {
-  background-color: #ffffff;
-  color: #FF6B6B;
-  border-radius: 36rpx;
-  font-size: 28rpx;
+  width: 220rpx;
+  flex-shrink: 0;
+  background: #ffffff;
+  color: #ff6b6b;
+  box-shadow: none;
 }
 
 .order-section {
-  background-color: #ffffff;
-  margin: -40rpx 30rpx 20rpx;
-  border-radius: 16rpx;
   overflow: hidden;
-  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.08);
+  padding: 8rpx 0;
 }
 
 .section-header {
@@ -43,38 +66,39 @@
   justify-content: space-between;
   align-items: center;
   padding: 30rpx;
-  border-bottom: 1rpx solid #eeeeee;
+  border-bottom: 1rpx solid #edf0f5;
 }
 
 .section-title {
   font-size: 30rpx;
   font-weight: bold;
-  color: #333333;
+  color: #25324a;
 }
 
 .section-more {
   font-size: 26rpx;
-  color: #999999;
+  color: #98a2b3;
 }
 
 .tab-bar {
   display: flex;
-  border-bottom: 1rpx solid #eeeeee;
+  padding: 0 20rpx 12rpx;
 }
 
 .tab-item {
   flex: 1;
-  height: 80rpx;
-  line-height: 80rpx;
+  height: 72rpx;
+  line-height: 72rpx;
   text-align: center;
   font-size: 28rpx;
-  color: #666666;
+  color: #6b7280;
+  border-radius: 999rpx;
 }
 
 .tab-item.active {
-  color: #FF6B6B;
-  font-weight: bold;
-  border-bottom: 4rpx solid #FF6B6B;
+  color: #ff6b6b;
+  font-weight: 700;
+  background: #fff0ec;
 }
 
 .order-list {
@@ -84,8 +108,8 @@
 .order-item {
   display: flex;
   padding: 20rpx;
-  background-color: #f5f5f5;
-  border-radius: 12rpx;
+  background-color: #f8fafc;
+  border-radius: 22rpx;
   margin-bottom: 16rpx;
 }
 
@@ -110,7 +134,7 @@
 
 .order-name {
   font-size: 28rpx;
-  color: #333333;
+  color: #25324a;
   font-weight: 500;
   display: block;
 }
@@ -137,20 +161,17 @@
 .order-quantity,
 .order-count {
   font-size: 24rpx;
-  color: #999999;
+  color: #98a2b3;
 }
 
 .empty-tip {
   text-align: center;
   padding: 60rpx;
-  color: #999999;
+  color: #98a2b3;
   font-size: 26rpx;
 }
 
 .menu-section {
-  background-color: #ffffff;
-  margin: 0 30rpx;
-  border-radius: 16rpx;
   overflow: hidden;
 }
 
@@ -158,7 +179,7 @@
   display: flex;
   align-items: center;
   padding: 30rpx;
-  border-bottom: 1rpx solid #eeeeee;
+  border-bottom: 1rpx solid #edf0f5;
 }
 
 .menu-item:last-child {
@@ -174,12 +195,12 @@
 .menu-text {
   flex: 1;
   font-size: 28rpx;
-  color: #333333;
+  color: #25324a;
 }
 
 .menu-arrow {
   font-size: 28rpx;
-  color: #cccccc;
+  color: #c2c8d0;
 }
 
 .menu-tag {
@@ -191,6 +212,6 @@
 }
 
 .menu-item.vip .menu-text {
-  color: #FF6B6B;
+  color: #ff6b6b;
   font-weight: 500;
 }

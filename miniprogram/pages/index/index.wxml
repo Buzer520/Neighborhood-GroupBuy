@@ -1,86 +1,136 @@
-<view class="container">
-  <view class="header">
-    <view class="community-selector" bindtap="switchCommunity">
-      <text class="community-name">{{community}}</text>
-      <text class="community-arrow">▼</text>
+<view class="home-page">
+  <view class="hero surface-card">
+    <view class="hero-top">
+      <view class="community-pill" bindtap="switchCommunity">
+        <text class="community-label">当前小区</text>
+        <text class="community-name">{{community}}</text>
+        <text class="community-arrow">▾</text>
+      </view>
+      <view class="hero-action" bindtap="goToPublish">发起拼单</view>
     </view>
+    <view class="hero-title">邻里一起拼，买菜买日用都更省</view>
+    <view class="hero-subtitle">按小区组织拼单，自提更方便，团长核销更安心。</view>
     <view class="search-box">
-      <input class="search-input" placeholder="搜索商品/拼单" bindconfirm="onSearch" />
-      <image class="search-icon" src="/assets/images/search.png" mode="aspectFit" />
+      <input
+        class="search-input"
+        placeholder="搜索商品、品类或邻里拼单"
+        value="{{keyword}}"
+        bindinput="onSearchInput"
+        bindconfirm="onSearchConfirm"
+        confirm-type="search"
+      />
+      <view class="search-trigger" bindtap="onSearchConfirm">
+        <image class="search-icon" src="/assets/images/search.png" mode="aspectFit" />
+      </view>
+    </view>
+    <view class="metric-row">
+      <view class="metric-item" wx:for="{{metrics}}" wx:key="label">
+        <text class="metric-label">{{item.label}}</text>
+        <text class="metric-value">{{item.value}}</text>
+        <text class="metric-accent">{{item.accent}}</text>
+      </view>
     </view>
   </view>
 
-  <scroll-view class="content" scroll-y enable-back-to-top>
-    <view class="hot-section">
-      <view class="section-title">热门拼单</view>
-      <scroll-view class="hot-scroll" scroll-x enable-flex>
-        <view class="hot-card" wx:for="{{hotGroupBuys}}" wx:key="_id" bindtap="goToDetail" data-id="{{item._id}}">
-          <view class="hot-image-wrapper">
-            <image class="hot-image" src="{{item.productImages[0]}}" />
-          </view>
-          <view class="hot-info">
-            <text class="hot-name text-ellipsis">{{item.productName}}</text>
-            <view class="hot-meta">
-              <text class="hot-price text-price">¥{{item.currentPrice || item.targetPrice}}</text>
-              <text class="hot-count">{{item.currentCount}}/{{item.targetCount}}人</text>
-            </view>
-            <view class="hot-countdown">{{item.countdownStr}}</view>
-          </view>
-          <view class="hot-progress">
-            <view class="progress-bar">
-              <view class="progress-fill" style="width: {{item.progress}}%"></view>
-            </view>
-            <text class="progress-text">{{item.progress}}%</text>
-          </view>
-        </view>
-      </scroll-view>
+  <view class="quick-grid surface-card">
+    <view class="quick-item" wx:for="{{quickEntries}}" wx:key="key" bindtap="handleQuickEntry" data-key="{{item.key}}">
+      <view class="quick-tag">{{item.tag}}</view>
+      <text class="quick-title">{{item.title}}</text>
+      <text class="quick-desc">{{item.desc}}</text>
     </view>
+  </view>
 
-    <view class="category-section">
-      <view class="section-title">分类</view>
-      <view class="category-grid">
-        <view class="category-item" wx:for="{{categories}}" wx:key="id" bindtap="goToCategory" data-id="{{item.id}}" data-name="{{item.name}}">
-          <text class="category-icon">{{item.icon}}</text>
-          <text class="category-name">{{item.name}}</text>
-        </view>
+  <view class="section-block">
+    <view class="section-header">
+      <view>
+        <view class="section-title">热门拼单</view>
+        <view class="section-desc">优先展示当前热度高、成团快的邻里好物</view>
       </view>
+      <view class="section-link" bindtap="goToDiscover">查看全部</view>
     </view>
-
-    <view class="nearby-section">
-      <view class="section-title">附近小区拼单</view>
-      <view class="group-list">
-        <view class="group-card" wx:for="{{nearbyGroupBuys}}" wx:key="_id" bindtap="goToDetail" data-id="{{item._id}}">
-          <view class="group-image-wrapper">
-            <image class="group-image" src="{{item.productImages[0]}}" />
+    <scroll-view class="hot-scroll" scroll-x enable-flex show-scrollbar="{{false}}">
+      <view class="hot-card surface-card" wx:for="{{hotGroupBuys}}" wx:key="_id" bindtap="goToDetail" data-id="{{item._id}}">
+        <image class="hot-image" src="{{item.coverImage}}" mode="aspectFill" />
+        <view class="hot-overlay">
+          <text class="hot-status">{{item.statusText}}</text>
+          <text class="hot-countdown">{{item.countdownStr}}</text>
+        </view>
+        <view class="hot-body">
+          <text class="hot-name text-ellipsis-2">{{item.productName}}</text>
+          <view class="hot-price-row">
+            <text class="hot-price">¥{{item.currentPrice}}</text>
+            <text class="hot-progress-text">{{item.currentCount}}/{{item.targetCount}}人</text>
           </view>
-          <view class="group-info">
-            <text class="group-name text-ellipsis-2">{{item.productName}}</text>
-            <view class="group-meta">
-              <text class="group-community tag tag-gray">{{item.community}}</text>
-              <text class="group-price text-price">¥{{item.currentPrice || item.targetPrice}}</text>
-            </view>
-            <view class="group-bottom">
-              <view class="group-progress">
-                <view class="progress-bar-small">
-                  <view class="progress-fill" style="width: {{item.progress}}%"></view>
-                </view>
-                <text class="progress-text-small">{{item.currentCount}}/{{item.targetCount}}人</text>
-              </view>
-              <text class="group-countdown">{{item.countdownStr}}</text>
-            </view>
+          <view class="progress-bar">
+            <view class="progress-fill" style="width: {{item.progress}}%"></view>
+          </view>
+          <view class="hot-foot">
+            <text class="hot-community">{{item.community}}</text>
+            <text class="hot-remain">{{item.remainingText}}</text>
           </view>
         </view>
       </view>
+    </scroll-view>
+  </view>
 
-      <view class="loading-tip" wx:if="{{loading}}">
+  <view class="section-block">
+    <view class="section-header">
+      <view>
+        <view class="section-title">常逛分类</view>
+        <view class="section-desc">按用户常见购物习惯整理，找拼单更快</view>
+      </view>
+    </view>
+    <view class="category-grid surface-card">
+      <view class="category-item" wx:for="{{categories}}" wx:key="id" bindtap="goToCategory" data-id="{{item.id}}" data-name="{{item.name}}">
+        <view class="category-icon">{{item.icon}}</view>
+        <text class="category-name">{{item.name}}</text>
+        <text class="category-subtitle">{{item.subtitle}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="section-block">
+    <view class="section-header">
+      <view>
+        <view class="section-title">附近正在拼</view>
+        <view class="section-desc">优先展示即将截止和同小区的拼单，决策更高效</view>
+      </view>
+    </view>
+    <view class="list-wrap">
+      <view class="list-card surface-card" wx:for="{{nearbyGroupBuys}}" wx:key="_id" bindtap="goToDetail" data-id="{{item._id}}">
+        <image class="list-cover" src="{{item.coverImage}}" mode="aspectFill" />
+        <view class="list-main">
+          <view class="list-top">
+            <view class="tag tag-primary">{{item.community}}</view>
+            <text class="list-time">{{item.countdownStr}}</text>
+          </view>
+          <text class="list-title text-ellipsis-2">{{item.productName}}</text>
+          <text class="list-sub text-ellipsis">{{item.tierSummary || '支持阶梯价，参与人数越多越划算'}}</text>
+          <view class="list-price-row">
+            <text class="list-price">¥{{item.currentPrice}}</text>
+            <text class="list-price-tip">{{item.remainingText}}</text>
+          </view>
+          <view class="progress-bar">
+            <view class="progress-fill" style="width: {{item.progress}}%"></view>
+          </view>
+          <view class="list-bottom">
+            <text class="list-count">{{item.currentCount}} / {{item.targetCount}}人</text>
+            <text class="list-cta">查看详情</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="status-tip" wx:if="{{loading}}">
         <text>加载中...</text>
       </view>
-      <view class="no-more" wx:if="{{showNoMore}}">
-        <text>没有更多了</text>
+      <view class="status-tip" wx:if="{{showNoMore}}">
+        <text>已经到底了，先看看这些优质拼单</text>
       </view>
-      <view class="empty-tip" wx:if="{{showEmpty}}">
-        <text>暂无拼单，去发布一个吧</text>
+      <view class="empty-card surface-card" wx:if="{{showEmpty}}">
+        <text class="empty-title">还没有符合条件的拼单</text>
+        <text class="empty-desc">你可以先发起一个，邀请邻居一起拼。</text>
+        <button class="btn-primary empty-btn" bindtap="goToPublish">去发起</button>
       </view>
     </view>
-  </scroll-view>
+  </view>
 </view>

@@ -1,6 +1,7 @@
 const app = getApp();
 const db = wx.cloud.database();
 const util = require('../../utils/util.js');
+const { PUBLISH_NOTICES } = require('../../config/preset.js');
 
 Page({
   data: {
@@ -16,7 +17,8 @@ Page({
     uploading: false,
     community: '',
     pickupPoint: '',
-    loading: false
+    loading: false,
+    publishNotices: PUBLISH_NOTICES
   },
 
   onLoad: function() {
@@ -149,15 +151,6 @@ Page({
     }
 
     return true;
-  },
-
-  generateTieredPrices: function(targetPrice) {
-    const price = parseFloat(targetPrice);
-    return [
-      { min: 1, price: Math.ceil(price * 1.2) },
-      { min: Math.ceil(targetCount * 0.5), price: Math.ceil(price * 1.05) },
-      { min: targetCount, price: price }
-    ];
   },
 
   publishGroupBuy: function() {
