@@ -1,0 +1,19 @@
+<view class="group-card {{type}}" bindtap="onTap">
+  <image class="card-image" src="{{groupBuy.productImages[0]}}" mode="aspectFill" />
+  <view class="card-info">
+    <text class="card-name text-ellipsis-2">{{groupBuy.productName}}</text>
+    <view class="card-meta">
+      <text class="card-community tag tag-gray" wx:if="{{groupBuy.community}}">{{groupBuy.community}}</text>
+      <text class="card-price text-price">¥{{currentPrice}}</text>
+    </view>
+    <view class="card-bottom">
+      <view class="card-progress">
+        <view class="progress-bar">
+          <view class="progress-fill" style="width: {{progress}}%"></view>
+        </view>
+        <text class="progress-text">{{groupBuy.currentCount}}/{{groupBuy.targetCount}}人</text>
+      </view>
+      <text class="card-countdown {{countdownStr === '已结束' ? 'expired' : ''}}">{{countdownStr}}</text>
+    </view>
+  </view>
+</view>

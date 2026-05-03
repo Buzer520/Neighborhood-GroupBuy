@@ -1,0 +1,59 @@
+<view class="container">
+  <view class="search-bar">
+    <input class="search-input" placeholder="搜索商品" value="{{keyword}}" bindconfirm="onSearch" />
+    <picker mode="selector" range="{{sortOptions}}" value="0" range-key="label" bindchange="onSortChange">
+      <view class="sort-btn">
+        <text>{{currentSortLabel}}</text>
+        <text class="sort-arrow">▼</text>
+      </view>
+    </picker>
+  </view>
+
+  <view class="category-bar">
+    <scroll-view class="category-scroll" scroll-x enable-flex>
+      <view class="category-item {{categoryId == item.id ? 'active' : ''}}" wx:for="{{categories}}" wx:key="id" bindtap="onCategoryChange" data-id="{{item.id}}">
+        {{item.name}}
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="result-tip" wx:if="{{keyword || categoryName}}">
+    <text wx:if="{{keyword}}">搜索: {{keyword}}</text>
+    <text wx:if="{{categoryName}}">分类: {{categoryName}}</text>
+    <text wx:if="{{resultCount > 0}}">共{{resultCount}}个拼单</text>
+  </view>
+
+  <scroll-view class="content" scroll-y enable-back-to-top bindscrolltolower="onReachBottom">
+    <view class="waterfall">
+      <view class="waterfall-item" wx:for="{{groupBuys}}" wx:key="_id" bindtap="goToDetail" data-id="{{item._id}}">
+        <image class="item-image" src="{{item.productImages[0]}}" mode="aspectFill" />
+        <view class="item-info">
+          <text class="item-name text-ellipsis-2">{{item.productName}}</text>
+          <view class="item-meta">
+            <text class="item-community tag tag-gray">{{item.community}}</text>
+            <text class="item-price text-price">¥{{item.currentPrice || item.targetPrice}}</text>
+          </view>
+          <view class="item-bottom">
+            <view class="item-progress">
+              <view class="progress-bar-small">
+                <view class="progress-fill" style="width: {{item.progress}}%"></view>
+              </view>
+              <text class="progress-text-small">{{item.currentCount}}/{{item.targetCount}}</text>
+            </view>
+            <text class="item-countdown">{{item.countdownStr}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="loading-tip" wx:if="{{loading}}">
+      <text>加载中...</text>
+    </view>
+    <view class="no-more" wx:if="{{showNoMore}}">
+      <text>没有更多了</text>
+    </view>
+    <view class="empty-tip" wx:if="{{showEmpty}}">
+      <text>暂无相关拼单</text>
+    </view>
+  </scroll-view>
+</view>

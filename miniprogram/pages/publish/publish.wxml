@@ -1,0 +1,76 @@
+<view class="container">
+  <view class="form-section">
+    <view class="form-item">
+      <view class="form-label required">商品名称</view>
+      <input class="form-input" placeholder="请输入商品名称" value="{{productName}}" bindinput="onProductNameInput" maxlength="50" />
+    </view>
+
+    <view class="form-item">
+      <view class="form-label required">商品图片</view>
+      <view class="image-list">
+        <view class="image-item" wx:for="{{productImages}}" wx:key="*this">
+          <image src="{{item}}" mode="aspectFill" bindtap="previewImage" data-index="{{index}}" />
+          <view class="image-remove" bindtap="removeImage" data-index="{{index}}">×</view>
+        </view>
+        <view class="image-add" bindtap="chooseImage" wx:if="{{productImages.length < 6}}">
+          <text class="add-icon">+</text>
+          <text class="add-text">添加图片</text>
+        </view>
+      </view>
+      <view class="form-tip">最多上传6张图片</view>
+    </view>
+
+    <view class="form-item">
+      <view class="form-label required">期望拼单价（元）</view>
+      <input class="form-input" type="digit" placeholder="请输入期望的拼单价" value="{{targetPrice}}" bindinput="onTargetPriceInput" />
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">规格描述</view>
+      <input class="form-input" placeholder="例如：5公斤/箱" value="{{spec}}" bindinput="onSpecInput" maxlength="30" />
+    </view>
+
+    <view class="form-item">
+      <view class="form-label required">最小拼团人数</view>
+      <input class="form-input" type="number" placeholder="2-100" value="{{targetCount}}" bindinput="onTargetCountChange" />
+      <view class="form-tip">达到此人数拼单即成功</view>
+    </view>
+
+    <view class="form-item">
+      <view class="form-label required">拼单截止时间</view>
+      <picker mode="selector" range="{{deadlineOptions}}" value="{{deadlineIndex}}" bindchange="onDeadlineChange">
+        <view class="picker-value">{{deadlineOptions[deadlineIndex]}}</view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">备注</view>
+      <textarea class="form-textarea" placeholder="可填写补充说明" value="{{remark}}" bindinput="onRemarkInput" maxlength="200" />
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">小区</view>
+      <view class="picker-value">{{community}}</view>
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">自提点</view>
+      <view class="picker-value">{{pickupPoint || '待定'}}</view>
+    </view>
+  </view>
+
+  <view class="notice-section">
+    <view class="notice-title">发布须知</view>
+    <view class="notice-item">1. 发布拼单需支付1元诚意金</view>
+    <view class="notice-item">2. 诚意金在拼单成功后可退还</view>
+    <view class="notice-item">3. 拼单失败时诚意金全额退还</view>
+    <view class="notice-item">4. 请确保商品信息真实有效</view>
+  </view>
+
+  <view class="bottom-bar">
+    <button class="publish-btn {{loading ? 'loading' : ''}}" bindtap="publishGroupBuy" disabled="{{loading}}">
+      <text wx:if="{{!loading}}">支付1元诚意金并发布</text>
+      <text wx:if="{{loading}}">发布中...</text>
+    </button>
+  </view>
+</view>

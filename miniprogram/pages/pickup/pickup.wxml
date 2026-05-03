@@ -1,0 +1,80 @@
+<view class="container">
+  <view class="login-section" wx:if="{{!isLoggedIn}}">
+    <view class="login-title">团长登录</view>
+    <view class="login-form">
+      <view class="form-item">
+        <input class="form-input" type="number" placeholder="请输入手机号" value="{{phone}}" bindinput="onPhoneInput" maxlength="11" />
+      </view>
+      <view class="form-item verify-code">
+        <input class="form-input" type="number" placeholder="请输入验证码" value="{{verifyCode}}" bindinput="onVerifyCodeInput" maxlength="6" />
+        <button class="verify-btn" bindtap="sendVerifyCode" disabled="{{verifyCodeSent}}">
+          {{verifyCodeSent ? countdown + 's' : '获取验证码'}}
+        </button>
+      </view>
+      <button class="login-btn" bindtap="login">登录</button>
+    </view>
+  </view>
+
+  <view class="pickup-section" wx:if="{{isLoggedIn}}">
+    <view class="manager-info">
+      <text class="manager-name">{{managerInfo.managerName}}</text>
+      <text class="manager-phone">{{managerInfo.phone}}</text>
+      <text class="logout-btn" bindtap="logout">退出</text>
+    </view>
+
+    <view class="action-bar">
+      <button class="scan-btn" bindtap="scanCode">
+        <image src="/assets/images/scan.png" mode="aspectFit" />
+        <text>扫码核销</text>
+      </button>
+      <view class="input-wrap">
+        <input class="code-input" type="number" placeholder="输入提货码" value="{{pickupCode}}" bindinput="onPickupCodeInput" maxlength="6" />
+        <button class="search-btn" bindtap="searchOrder">查询</button>
+      </view>
+    </view>
+
+    <view class="order-list">
+      <view class="list-title">待核销订单 ({{pendingOrders.length}})</view>
+      <view class="order-item" wx:for="{{pendingOrders}}" wx:key="_id" bindtap="findAndConfirmOrder" data-code="{{item.pickupCode}}">
+        <view class="order-left">
+          <text class="order-user">{{item.userInfo.nickName || '用户'}}</text>
+          <text class="order-code">提货码: {{item.pickupCode}}</text>
+        </view>
+        <view class="order-right">
+          <text class="order-amount text-price">¥{{item.totalAmount}}</text>
+          <text class="order-quantity">×{{item.quantity}}</text>
+        </view>
+      </view>
+      <view class="empty-tip" wx:if="{{pendingOrders.length === 0 && !loading}}">
+        <text>暂无待核销订单</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="confirm-modal {{showConfirmModal ? 'show' : ''}}" wx:if="{{showConfirmModal}}">
+    <view class="modal-mask" bindtap="hideConfirmModal"></view>
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="modal-title">确认核销</text>
+      </view>
+      <view class="modal-body" wx:if="{{selectedOrder}}">
+        <view class="confirm-item">
+          <text class="confirm-label">用户</text>
+          <text class="confirm-value">{{selectedOrder.userInfo.nickName || '用户'}}</text>
+        </view>
+        <view class="confirm-item">
+          <text class="confirm-label">提货码</text>
+          <text class="confirm-value">{{selectedOrder.pickupCode}}</text>
+        </view>
+        <view class="confirm-item">
+          <text class="confirm-label">金额</text>
+          <text class="confirm-value text-price">¥{{selectedOrder.totalAmount}}</text>
+        </view>
+      </view>
+      <view class="modal-footer">
+        <button class="cancel-btn" bindtap="hideConfirmModal">取消</button>
+        <button class="confirm-btn" bindtap="confirmPickup">确认核销</button>
+      </view>
+    </view>
+  </view>
+</view>

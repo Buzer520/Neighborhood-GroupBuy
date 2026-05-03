@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "openapi": []
+  },
+  "超时": 60000,
+  "触发器": {
+    "name": "checkStatus",
+    "type": "timer",
+    "config": "0 */5 * * * *"
+  }
+}

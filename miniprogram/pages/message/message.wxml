@@ -1,0 +1,46 @@
+<view class="container">
+  <view class="tab-bar">
+    <view class="tab-item {{currentTab === 'system' ? 'active' : ''}}" bindtap="onTabChange" data-value="system">
+      <text>系统通知</text>
+      <view class="tab-badge" wx:if="{{hasUnreadSystem}}"></view>
+    </view>
+    <view class="tab-item {{currentTab === 'interaction' ? 'active' : ''}}" bindtap="onTabChange" data-value="interaction">
+      <text>互动消息</text>
+      <view class="tab-badge" wx:if="{{hasUnreadInteraction}}"></view>
+    </view>
+  </view>
+
+  <view class="tab-actions" wx:if="{{currentTab === 'system' && hasUnreadSystem}}">
+    <text bindtap="markAllRead">全部已读</text>
+  </view>
+
+  <scroll-view class="message-list" scroll-y>
+    <view class="message-item {{item.read ? 'read' : ''}}" wx:for="{{currentTab === 'system' ? systemMessages : interactionMessages}}" wx:key="_id" bindtap="goToDetail" data-id="{{item._id}}" data-groupid="{{item.groupId}}">
+      <view class="message-icon">
+        <image wx:if="{{item.type === 'system'}}" src="/assets/images/system.png" mode="aspectFit" />
+        <image wx:else src="/assets/images/interaction.png" mode="aspectFit" />
+      </view>
+      <view class="message-content">
+        <view class="message-header">
+          <text class="message-title">{{item.title}}</text>
+          <text class="message-time">{{item.timeStr}}</text>
+        </view>
+        <text class="message-desc">{{item.content}}</text>
+        <view class="message-footer" wx:if="{{item.groupId}}">
+          <text class="message-link">点击查看拼单详情 ></text>
+        </view>
+      </view>
+      <view class="unread-dot" wx:if="{{!item.read}}"></view>
+    </view>
+
+    <view class="loading-tip" wx:if="{{loading}}">
+      <text>加载中...</text>
+    </view>
+    <view class="no-more" wx:if="{{showNoMore}}">
+      <text>没有更多了</text>
+    </view>
+    <view class="empty-tip" wx:if="{{showEmpty}}">
+      <text>暂无消息</text>
+    </view>
+  </scroll-view>
+</view>

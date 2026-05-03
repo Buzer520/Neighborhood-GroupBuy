@@ -1,0 +1,96 @@
+.group-card {
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.06);
+}
+
+.group-card .card-image {
+  width: 100%;
+  height: 320rpx;
+}
+
+.group-card .card-info {
+  padding: 16rpx;
+}
+
+.group-card .card-name {
+  font-size: 28rpx;
+  color: #333333;
+  line-height: 1.4;
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.group-card .card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.group-card .card-community {
+  font-size: 20rpx;
+  max-width: 140rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.group-card .card-price {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.group-card .card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.group-card .card-progress {
+  display: flex;
+  align-items: center;
+}
+
+.group-card .progress-bar {
+  width: 100rpx;
+  height: 6rpx;
+  background-color: #eeeeee;
+  border-radius: 3rpx;
+  overflow: hidden;
+}
+
+.group-card .progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #FF6B6B, #FF8E8E);
+  border-radius: 3rpx;
+  transition: width 0.3s ease;
+}
+
+.group-card .progress-text {
+  font-size: 20rpx;
+  color: #999999;
+  margin-left: 8rpx;
+}
+
+.group-card .card-countdown {
+  font-size: 22rpx;
+  color: #FF6B6B;
+}
+
+.group-card .card-countdown.expired {
+  color: #999999;
+}
+
+.group-card.small .card-image {
+  height: 200rpx;
+}
+
+.group-card.small .card-name {
+  font-size: 26rpx;
+}
+
+.group-card.small .card-price {
+  font-size: 28rpx;
+}

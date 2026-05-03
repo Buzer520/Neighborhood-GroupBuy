@@ -1,0 +1,91 @@
+<view class="container">
+  <view class="user-section">
+    <view class="user-info" wx:if="{{hasUserInfo}}">
+      <image class="user-avatar" src="{{userInfo.avatarUrl}}" mode="aspectFill" />
+      <text class="user-nickname">{{userInfo.nickName}}</text>
+    </view>
+    <view class="user-info" wx:else>
+      <button class="login-btn" size="mini" bindtap="onLoginTap">登录</button>
+    </view>
+  </view>
+
+  <view class="order-section">
+    <view class="section-header">
+      <text class="section-title">我的订单</text>
+      <picker mode="selector" range="{{orderStatus}}" value="0" range-key="label" bindchange="onOrderStatusChange">
+        <text class="section-more">{{currentStatusLabel}} ▼</text>
+      </picker>
+    </view>
+
+    <view class="tab-bar">
+      <view class="tab-item {{currentOrderTab === 'joined' ? 'active' : ''}}" bindtap="onOrderTabChange" data-value="joined">
+        我参与的
+      </view>
+      <view class="tab-item {{currentOrderTab === 'created' ? 'active' : ''}}" bindtap="onOrderTabChange" data-value="created">
+        我发起的
+      </view>
+    </view>
+
+    <view class="order-list" wx:if="{{currentOrderTab === 'joined'}}">
+      <view class="order-item" wx:for="{{myOrders}}" wx:key="_id" bindtap="goToDetail" data-id="{{item.groupId}}">
+        <image class="order-image" src="{{item.groupInfo.productImages[0]}}" mode="aspectFill" />
+        <view class="order-info">
+          <text class="order-name text-ellipsis">{{item.groupInfo.productName}}</text>
+          <text class="order-status tag tag-primary">{{item.statusText}}</text>
+        </view>
+        <view class="order-meta">
+          <text class="order-price text-price">¥{{item.unitPrice}}</text>
+          <text class="order-quantity">×{{item.quantity}}</text>
+        </view>
+      </view>
+      <view class="empty-tip" wx:if="{{showOrderEmpty}}">
+        <text>暂无订单</text>
+      </view>
+    </view>
+
+    <view class="order-list" wx:if="{{currentOrderTab === 'created'}}">
+      <view class="order-item" wx:for="{{myGroupBuys}}" wx:key="_id" bindtap="goToDetail" data-id="{{item._id}}">
+        <image class="order-image" src="{{item.productImages[0]}}" mode="aspectFill" />
+        <view class="order-info">
+          <text class="order-name text-ellipsis">{{item.productName}}</text>
+          <text class="order-status tag tag-primary">{{item.statusText}}</text>
+        </view>
+        <view class="order-meta">
+          <text class="order-price text-price">¥{{item.targetPrice}}</text>
+          <text class="order-count">{{item.currentCount}}/{{item.targetCount}}人</text>
+        </view>
+      </view>
+      <view class="empty-tip" wx:if="{{showGroupEmpty}}">
+        <text>暂无拼单</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="menu-section">
+    <view class="menu-item" bindtap="goToAddresses">
+      <image class="menu-icon" src="/assets/images/address.png" mode="aspectFit" />
+      <text class="menu-text">地址管理</text>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="goToDepositLog">
+      <image class="menu-icon" src="/assets/images/deposit.png" mode="aspectFit" />
+      <text class="menu-text">诚意金记录</text>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="goToPickup">
+      <image class="menu-icon" src="/assets/images/pickup.png" mode="aspectFit" />
+      <text class="menu-text">团长核销</text>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item vip" bindtap="">
+      <image class="menu-icon" src="/assets/images/vip.png" mode="aspectFit" />
+      <text class="menu-text">VIP会员</text>
+      <text class="menu-tag">即将开放</text>
+    </view>
+    <view class="menu-item" bindtap="goToSettings">
+      <image class="menu-icon" src="/assets/images/settings.png" mode="aspectFit" />
+      <text class="menu-text">设置</text>
+      <text class="menu-arrow">></text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,142 @@
+<view class="container" wx:if="{{groupBuy}}">
+  <swiper class="banner-swiper" indicator-dots autoplay circular>
+    <swiper-item wx:for="{{groupBuy.productImages}}" wx:key="*this">
+      <image class="banner-image" src="{{item}}" mode="aspectFill" />
+    </swiper-item>
+  </swiper>
+
+  <view class="info-section">
+    <view class="product-header">
+      <text class="product-name">{{groupBuy.productName}}</text>
+      <view class="product-spec" wx:if="{{groupBuy.spec}}">{{groupBuy.spec}}</view>
+    </view>
+
+    <view class="creator-info">
+      <image class="creator-avatar" src="{{creator.avatarUrl}}" mode="aspectFill" />
+      <view class="creator-detail">
+        <text class="creator-name">{{creator.nickName}}</text>
+        <text class="creator-label">发起人</text>
+      </view>
+      <view class="community-tag tag tag-primary">{{groupBuy.community}}</view>
+    </view>
+  </view>
+
+  <view class="progress-section">
+    <view class="progress-header">
+      <text class="progress-title">拼单进度</text>
+      <text class="progress-count">{{groupBuy.currentCount}}/{{groupBuy.targetCount}}人</text>
+    </view>
+    <view class="progress-bar">
+      <view class="progress-fill" style="width: {{progress}}%"></view>
+    </view>
+    <text class="progress-percent">{{progress}}%</text>
+  </view>
+
+  <view class="price-section">
+    <view class="section-title">阶梯价格</view>
+    <view class="tiered-prices">
+      <view class="tier-item {{groupBuy.currentCount >= item.min ? 'active' : ''}}" wx:for="{{groupBuy.tieredPrices}}" wx:key="min">
+        <text class="tier-count">满{{item.min}}人</text>
+        <text class="tier-price">¥{{item.price}}</text>
+      </view>
+    </view>
+    <view class="current-price-wrap">
+      <text class="current-price-label">当前价格</text>
+      <text class="current-price text-price">
+        <text class="price-symbol">¥</text>
+        <text class="price-value">{{currentPrice}}</text>
+      </text>
+    </view>
+  </view>
+
+  <view class="countdown-section">
+    <view class="section-title">剩余时间</view>
+    <view class="countdown-wrap">
+      <text class="countdown-text {{countdown === '已结束' ? 'expired' : ''}}">{{countdown}}</text>
+    </view>
+  </view>
+
+  <view class="participants-section">
+    <view class="section-title">已参与用户</view>
+    <view class="participants-list">
+      <view class="participant-item" wx:for="{{participants}}" wx:key="_id">
+        <image class="participant-avatar" src="{{item.avatarUrl}}" mode="aspectFill" />
+      </view>
+      <view class="participant-empty" wx:if="{{participants.length === 0}}">
+        <text>暂无用户参与，快来成为第一个吧</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="pickup-section" wx:if="{{groupBuy.pickupPoint}}">
+    <view class="section-title">自提点</view>
+    <view class="pickup-info">
+      <text class="pickup-name">{{groupBuy.pickupPoint}}</text>
+    </view>
+  </view>
+
+  <view class="bottom-bar">
+    <view class="bottom-left">
+      <button class="share-btn" open-type="share" plain>
+        <image src="/assets/images/share.png" mode="aspectFit" />
+        <text>分享</text>
+      </button>
+    </view>
+    <view class="bottom-right">
+      <button class="join-btn" wx:if="{{!hasJoined && !isCreator}}" bindtap="showJoinModal">
+        立即参与
+      </button>
+      <button class="invite-btn" wx:if="{{hasJoined && !isCreator}}" bindtap="goToShare">
+        邀请好友
+      </button>
+      <button class="my-order-btn" wx:if="{{hasJoined}}" bindtap="goToMyOrder">
+        查看订单
+      </button>
+    </view>
+  </view>
+
+  <view class="join-modal {{showJoinModal ? 'show' : ''}}" wx:if="{{showJoinModal}}">
+    <view class="modal-mask" bindtap="hideJoinModal"></view>
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="modal-title">选择参与方式</text>
+        <icon class="modal-close" type="clear" bindtap="hideJoinModal" />
+      </view>
+
+      <view class="pay-type-tabs">
+        <view class="pay-tab {{currentTab === 'deposit' ? 'active' : ''}}" bindtap="selectPayType" data-type="deposit">
+          支付定金（30%）
+        </view>
+        <view class="pay-tab {{currentTab === 'full' ? 'active' : ''}}" bindtap="selectPayType" data-type="full">
+          支付全款
+        </view>
+      </view>
+
+      <view class="quantity-wrap">
+        <text class="quantity-label">购买份数</text>
+        <view class="quantity-control">
+          <text class="quantity-btn minus" bindtap="onQuantityChange" data-action="minus">-</text>
+          <input class="quantity-input" type="number" value="{{quantity}}" bindinput="onQuantityChange" />
+          <text class="quantity-btn plus" bindtap="onQuantityChange" data-action="plus">+</text>
+        </view>
+      </view>
+
+      <view class="amount-info">
+        <view class="amount-row">
+          <text>单价</text>
+          <text>¥{{currentPrice}}</text>
+        </view>
+        <view class="amount-row">
+          <text>份数</text>
+          <text>×{{quantity}}</text>
+        </view>
+        <view class="amount-row total">
+          <text>{{currentTab === 'deposit' ? '应付定金' : '应付全款'}}</text>
+          <text class="text-price">¥{{calculateAmount()}}</text>
+        </view>
+      </view>
+
+      <button class="confirm-btn" bindtap="joinGroupBuy">确认参与</button>
+    </view>
+  </view>
+</view>

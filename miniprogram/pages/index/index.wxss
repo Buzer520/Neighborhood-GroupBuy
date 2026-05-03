@@ -1,0 +1,295 @@
+.header {
+  padding: 20rpx 20rpx;
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.community-selector {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.community-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.community-arrow {
+  font-size: 20rpx;
+  color: #ffffff;
+  margin-left: 10rpx;
+}
+
+.search-box {
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 44rpx;
+  height: 72rpx;
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  flex: 1;
+  height: 72rpx;
+  padding: 0 70rpx 0 30rpx;
+  font-size: 28rpx;
+}
+
+.search-icon {
+  position: absolute;
+  right: 24rpx;
+  width: 36rpx;
+  height: 36rpx;
+  opacity: 0.5;
+}
+
+.content {
+  height: calc(100vh - 160rpx);
+  background-color: #f5f5f5;
+}
+
+.hot-section {
+  padding: 20rpx;
+  background-color: #ffffff;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 16rpx;
+}
+
+.hot-scroll {
+  white-space: nowrap;
+  display: flex;
+}
+
+.hot-card {
+  width: 280rpx;
+  margin-right: 16rpx;
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+  display: inline-block;
+  vertical-align: top;
+  flex-shrink: 0;
+}
+
+.hot-image-wrapper {
+  width: 100%;
+  height: 200rpx;
+  overflow: hidden;
+}
+
+.hot-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hot-info {
+  padding: 12rpx;
+}
+
+.hot-name {
+  font-size: 26rpx;
+  font-weight: 500;
+  color: #333333;
+  margin-bottom: 8rpx;
+  display: block;
+}
+
+.hot-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8rpx;
+}
+
+.hot-price {
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.hot-count {
+  font-size: 22rpx;
+  color: #999999;
+}
+
+.hot-countdown {
+  font-size: 20rpx;
+  color: #FF6B6B;
+  background-color: rgba(255, 107, 107, 0.1);
+  padding: 4rpx 10rpx;
+  border-radius: 8rpx;
+  display: inline-block;
+}
+
+.hot-progress {
+  padding: 0 12rpx 12rpx;
+  display: flex;
+  align-items: center;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 8rpx;
+  background-color: #eeeeee;
+  border-radius: 4rpx;
+  overflow: hidden;
+  margin-right: 10rpx;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #FF6B6B, #FF8E8E);
+  border-radius: 4rpx;
+  transition: width 0.3s ease;
+}
+
+.progress-bar-small {
+  width: 100rpx;
+  height: 6rpx;
+  background-color: #eeeeee;
+  border-radius: 3rpx;
+  overflow: hidden;
+}
+
+.progress-text {
+  font-size: 22rpx;
+  color: #FF6B6B;
+  width: 60rpx;
+  text-align: right;
+}
+
+.progress-text-small {
+  font-size: 20rpx;
+  color: #999999;
+  margin-left: 8rpx;
+}
+
+.category-section {
+  padding: 16rpx 16rpx 20rpx;
+}
+
+.category-grid {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 16rpx;
+}
+
+.category-item {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16rpx 0;
+}
+
+.category-icon {
+  font-size: 44rpx;
+  margin-bottom: 8rpx;
+}
+
+.category-name {
+  font-size: 24rpx;
+  color: #666666;
+}
+
+.nearby-section {
+  padding: 0 16rpx 20rpx;
+}
+
+.group-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.group-card {
+  display: flex;
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 16rpx;
+  margin-bottom: 16rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.06);
+}
+
+.group-image-wrapper {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 12rpx;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.group-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.group-info {
+  flex: 1;
+  margin-left: 16rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.group-name {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333333;
+  line-height: 1.4;
+}
+
+.group-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8rpx;
+}
+
+.group-community {
+  font-size: 22rpx;
+}
+
+.group-price {
+  font-size: 34rpx;
+  font-weight: bold;
+}
+
+.group-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8rpx;
+}
+
+.group-progress {
+  display: flex;
+  align-items: center;
+}
+
+.group-countdown {
+  font-size: 22rpx;
+  color: #FF6B6B;
+}
+
+.loading-tip,
+.no-more,
+.empty-tip {
+  text-align: center;
+  padding: 24rpx;
+  color: #999999;
+  font-size: 24rpx;
+}
