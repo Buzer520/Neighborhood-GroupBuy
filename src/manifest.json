@@ -1,0 +1,27 @@
+{
+  "name": "邻里拼单",
+  "appid": "__UNI__GROUPBUY",
+  "description": "邻里拼单小程序",
+  "versionName": "1.0.0",
+  "versionCode": "100",
+  "transformPx": false,
+  "h5": {
+    "title": "邻里拼单",
+    "router": {
+      "mode": "hash",
+      "base": "./"
+    },
+    "optimization": {
+      "treeShaking": {
+        "enable": true
+      }
+    }
+  },
+  "mp-weixin": {
+    "appid": "wx7dfd43e26beb9bf4",
+    "setting": {
+      "urlCheck": false
+    },
+    "usingComponents": true
+  }
+}

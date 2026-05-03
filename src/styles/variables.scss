@@ -1,0 +1,54 @@
+$primary-color: #ff6b6b;
+$primary-light: #ff8787;
+$primary-dark: #fa5252;
+$success-color: #51cf66;
+$warning-color: #fcc41;
+9;
+$error-color: #ff6b6b;
+$info-color: #74c0fc;
+
+$text-primary: #2d3436;
+$text-secondary: #636e72;
+$text-muted: #b2bec3;
+$text-light: #dfe6e9;
+
+$bg-primary: #ffffff;
+$bg-secondary: #f5f7fa;
+$bg-dark: #2d3436;
+
+$border-color: #e9ecef;
+$border-light: #f1f3f5;
+
+$font-size-xs: 22rpx;
+$font-size-sm: 24rpx;
+$font-size-base: 28rpx;
+$font-size-lg: 32rpx;
+$font-size-xl: 36rpx;
+$font-size-xxl: 40rpx;
+
+$spacing-xs: 8rpx;
+$spacing-sm: 16rpx;
+$spacing-base: 24rpx;
+$spacing-lg: 32rpx;
+$spacing-xl: 48rpx;
+
+$radius-sm: 8rpx;
+$radius-base: 12rpx;
+$radius-lg: 16rpx;
+$radius-xl: 24rpx;
+$radius-full: 9999rpx;
+
+$shadow-sm: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
+$shadow-base: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+$shadow-lg: 0 8rpx 24rpx rgba(0, 0, 0, 0.12);
+
+$uni-color-primary: $primary-color;
+$uni-color-success: $success-color;
+$uni-color-warning: $warning-color;
+$uni-color-error: $error-color;
+$uni-text-color: $text-primary;
+$uni-text-color-secondary: $text-secondary;
+$uni-text-color-placeholder: $text-muted;
+$uni-bg-color: $bg-secondary;
+$uni-bg-color-grey: $bg-primary;
+$uni-border-color: $border-color;
