@@ -71,14 +71,7 @@ Page({
         });
         wx.setStorageSync('userInfo', userInfo);
         
-        const mockOpenId = 'test_openid_' + Date.now();
-        app.globalData.openId = mockOpenId;
-        wx.setStorageSync('openId', mockOpenId);
-        
-        this.saveUserInfo(userInfo, mockOpenId);
-        this.loadMyGroupBuys();
-        this.loadMyOrders();
-        wx.showToast({ title: '登录成功', icon: 'success' });
+        this.loginToCloud(userInfo);
       },
       fail: err => {
         console.error('getUserProfile 失败:', err);
@@ -86,28 +79,44 @@ Page({
       }
     });
   },
+  
+  loginToCloud: function(userInfo) {
+    wx.showLoading({ title: '登录中...' });
+    
+    app.login(res => {
+      wx.hideLoading();
+      
+      if (res.success && res.openid) {
+        const openId = res.openid;
+        console.log('云函数登录成功，openId:', openId);
+        
+        this.saveUserInfo(userInfo, openId);
+        this.loadMyGroupBuys();
+        this.loadMyOrders();
+        wx.showToast({ title: '登录成功', icon: 'success' });
+      } else {
+        wx.showToast({ title: res.message || '登录失败', icon: 'none' });
+      }
+    });
+  },
 
   saveUserInfo: function(userInfo, openId) {
     if (!openId) return;
 
-    db.collection('user').doc(openId).update({
+    db.collection('user').doc(openId).set({
       data: {
         nickName: userInfo.nickName,
         avatarUrl: userInfo.avatarUrl,
+        balance: 10,
+        vipLevel: 0,
+        createdAt: new Date(),
         updatedAt: new Date()
       }
-    }).catch(() => {
-      db.collection('user').add({
-        data: {
-          _id: openId,
-          nickName: userInfo.nickName,
-          avatarUrl: userInfo.avatarUrl,
-          balance: 10,
-          vipLevel: 0,
-          createdAt: new Date(),
-          updatedAt: new Date()
-        }
-      });
+    }).then(() => {
+      console.log('用户信息保存成功，openId:', openId);
+    }).catch(err => {
+      console.error('用户信息保存失败:', err);
+      wx.showToast({ title: '保存失败', icon: 'none' });
     });
   },
 

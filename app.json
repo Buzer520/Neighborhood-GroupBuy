@@ -1,15 +1,12 @@
 {
   "pages": [
-    "pages/index/home",
-    "pages/product/list",
-    "pages/product/detail",
-    "pages/groupbuy/create",
-    "pages/groupbuy/detail",
-    "pages/order/list",
-    "pages/order/detail",
-    "pages/cart/cart",
-    "pages/user/profile",
-    "pages/user/address"
+    "pages/index/index",
+    "pages/discover/discover",
+    "pages/detail/detail",
+    "pages/publish/publish",
+    "pages/pickup/pickup",
+    "pages/mine/mine",
+    "pages/message/message"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ff6b6b",
@@ -27,28 +24,28 @@
     "borderStyle": "black",
     "list": [
       {
-        "pagePath": "pages/index/home",
+        "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "assets/icons/home.png",
-        "selectedIconPath": "assets/icons/home-active.png"
+        "iconPath": "assets/images/home.png",
+        "selectedIconPath": "assets/images/home-active.png"
       },
       {
-        "pagePath": "pages/product/list",
+        "pagePath": "pages/discover/discover",
         "text": "发现",
-        "iconPath": "assets/icons/discover.png",
-        "selectedIconPath": "assets/icons/discover-active.png"
+        "iconPath": "assets/images/discover.png",
+        "selectedIconPath": "assets/images/discover-active.png"
       },
       {
-        "pagePath": "pages/cart/cart",
-        "text": "购物车",
-        "iconPath": "assets/icons/cart.png",
-        "selectedIconPath": "assets/icons/cart-active.png"
+        "pagePath": "pages/pickup/pickup",
+        "text": "自提",
+        "iconPath": "assets/images/pickup.png",
+        "selectedIconPath": "assets/images/pickup.png"
       },
       {
-        "pagePath": "pages/user/profile",
+        "pagePath": "pages/mine/mine",
         "text": "我的",
-        "iconPath": "assets/icons/user.png",
-        "selectedIconPath": "assets/icons/user-active.png"
+        "iconPath": "assets/images/mine.png",
+        "selectedIconPath": "assets/images/mine-active.png"
       }
     ]
   },

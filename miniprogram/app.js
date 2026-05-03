@@ -17,7 +17,7 @@ App({
     
     try {
       wx.cloud.init({
-        env: 'cloud1-d1gky8e77baef008f',
+        env: 'groupbuy-prod-d1g2aeyhy9dd21ed2',
         traceUser: true,
       });
       console.log('云开发初始化成功');
